@@ -54,6 +54,7 @@ public class KafkaConsumer {
                 log.warn("Fant ikke arbeidsforhold med id {} i Aareg", arbeidsforholdId);
                 ack.acknowledge();
             } else {
+                log.info("Fant arbeidsforhold: {}", jsonMapper.writeValueAsString(aaregArbeidsforhold));
                 var arbeidsforholdPar = tenorUtil.konverterArbeidsforhold(aaregArbeidsforhold);
                 var erKandidatForEndring = tenorService.erKandidatForTenorOpplasting(arbeidsforholdPar.getValue());
 
