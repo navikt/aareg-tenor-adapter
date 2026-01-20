@@ -6,6 +6,7 @@ import no.nav.aareg.tenor.consumer.aareg.domain.v2.Arbeidsforhold;
 import no.nav.aareg.tenor.consumer.texas.TexasConsumer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClient;
 
 import java.util.Map;
@@ -46,18 +47,19 @@ public class AaregServicesConsumer {
                 URL_PARAM_SPORINGSINFORMASJON, TRUE
         );
 
-        return aaregServicesRestClient.get()
-                .uri(URL_ARBEIDSFORHOLD, queryParams)
-                .headers(httpHeaders -> {
-                    httpHeaders.set("Nav-Call-Id", randomUUID().toString());
-                    httpHeaders.set("Nav-Consumer-Id", appName);
-                    httpHeaders.setBearerAuth(texasConsumer.hentToken(TexasConsumer.IDP_AZURE_AD, aaregServicesScope));
-                })
-                .retrieve()
-                .onStatus(status -> status.value() == 404, (_, _) -> {
-                    // samme som return null;
-                    return;
-                })
-                .body(Arbeidsforhold.class);
+        try {
+            return aaregServicesRestClient.get()
+                    .uri(URL_ARBEIDSFORHOLD, queryParams)
+                    .headers(httpHeaders -> {
+                        httpHeaders.set("Nav-Call-Id", randomUUID().toString());
+                        httpHeaders.set("Nav-Consumer-Id", appName);
+                        httpHeaders.setBearerAuth(texasConsumer.hentToken(TexasConsumer.IDP_AZURE_AD, aaregServicesScope));
+                    })
+                    .retrieve()
+                    .body(Arbeidsforhold.class);
+        } catch (HttpClientErrorException.NotFound e) {
+            log.info("aareg-services returnerte 404 for arbeidsforhold med id {}", navArbeidsforholdId);
+            return null;
+        }
     }
 }
