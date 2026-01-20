@@ -1,0 +1,50 @@
+{
+  "id": 6088,
+  "endringstype": "Endring",
+  "entitetsendringer": [
+    "TimerMedTimeloenn"
+  ],
+  "arbeidsforhold": {
+    "navArbeidsforholdId": 3058067,
+    "navUuid": "189762e2-1a71-4888-b2b1-add088fd92c8",
+    "type": {
+      "kode": "ordinaertArbeidsforhold",
+      "beskrivelse": "Ordinært arbeidsforhold"
+    },
+    "arbeidstaker": {
+      "identer": [
+        {
+          "type": "AKTORID",
+          "ident": "2036814015183",
+          "gjeldende": true
+        },
+        {
+          "type": "FOLKEREGISTERIDENT",
+          "ident": "05064600054",
+          "gjeldende": true
+        }
+      ]
+    },
+    "arbeidssted": {
+      "type": "Underenhet",
+      "identer": [
+        {
+          "type": "ORGANISASJONSNUMMER",
+          "ident": "811094552",
+          "gjeldende": true
+        }
+      ]
+    },
+    "opplysningspliktig": {
+      "type": "Hovedenhet",
+      "identer": [
+        {
+          "type": "ORGANISASJONSNUMMER",
+          "ident": "811094242",
+          "gjeldende": true
+        }
+      ]
+    }
+  },
+  "tidsstempel": "2022-04-10T18:20:23.013"
+}

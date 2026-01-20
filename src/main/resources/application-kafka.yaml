@@ -1,0 +1,19 @@
+spring:
+  kafka:
+    bootstrap-servers: ${KAFKA_BROKERS}
+    client-id: ${app.name}
+    properties:
+      security.protocol: SSL
+      ssl:
+        truststore.type: JKS
+        truststore.location: ${KAFKA_TRUSTSTORE_PATH}
+        truststore.password: ${KAFKA_CREDSTORE_PASSWORD}
+        keystore.type: PKCS12
+        keystore.location: ${KAFKA_KEYSTORE_PATH}
+        keystore.password: ${KAFKA_CREDSTORE_PASSWORD}
+    listener:
+      concurrency: 3
+      poll-timeout: 10000
+      ack-mode: manual_immediate
+    consumer:
+      max-poll-records: 10000

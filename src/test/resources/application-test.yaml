@@ -1,0 +1,32 @@
+AZURE_APP_CLIENT_ID: TestApp
+AZURE_APP_CLIENT_SECRET: TestSecret
+
+nais.token:
+  exchange.endpoint: http://localhost:${wiremock.server.port}/texas/exchange
+  endpoint: http://localhost:${wiremock.server.port}/texas/token
+
+api.url.tenor:
+  freg: 'http://localhost:${wiremock.server.port}/tenor/fnr/'
+  brreg: 'http://localhost:${wiremock.server.port}/tenor/orgnr/'
+
+APP_SECURITY_OIDC_IDP_ENTRA_ISSUERURL: http://entra
+APP_SECURITY_OIDC_IDP_ENTRA_JWKSETURI: http://localhost:${wiremock.server.port}/entra/jwks
+
+maskinporten:
+  clientId: DUMMY
+  #clientJwk er generert med GeneratePrivateKey.java.
+  clientJwk: '{"p":"uLET5f5hH0PrN9UyIlVhkrpvFlStGCPSTVb2n5LC1AjQxnSvpKdu1TZKp037FqB_itDpzvDHCJbIIkeUdRll9P2dEN0dvxtn4jJU2c8gYnuZdgN1JJM7ApeY1N2AgxIt8yNPN7TtSDdKCfj_QiT0CSXl9RBIxsXRD70nDKvUJTE","kty":"RSA","q":"uBYsOkYgC2-_WxsXhrw6US-_ONYgEapCJMzuCWM6XQ7FNbuTddhPHWKq1QClMaqDEIwpJpH3Z8cbewallTu9ZdPxdp8pbihWs_TMU--xLV9L8Q-7ZUAmKBJ4-XeSFV9V9mi818I5KCw7ZRqDnfhWxHxDSdKOHs8qXFuL_7VSWO8","d":"Lg1FUMuCGA65o-ZrYf8OYEmPqYLPsg-Bka65Ct4NfxgFSCH43UItDYC84u6kkWd0IyY2H04zlCDI2rDmiHICgtgS2UpcTtflOmxByTk4PgTMRlzpdQjtmkRXJ2ZUYX9aJDjPtFCIw16CBrY3YaZeYk1PgocTk7lhns8R4HxgtlHojRf93n5fs7vMwljSJAoop12K0nOzyAWsDzWiAeXpsB5ajBwuLtz4EQkjBoUUwR9wp73LOWWJfWHXAmRwDmLWTVrTnzZT2H4R_liwh4pziTAGZVYpDmKPn22WqhWFHaWFzyC-nCrx9nzyZoyJODqtzgw5FChIIUe-KCCAXoNVIQ","e":"AQAB","kid":"f5e1bec8-86be-49b5-baef-ec33810af36c","qi":"JJPycJxeXNblLtHJcu1GtXoKPPIPuMbZLH22zD8c1FDUq7uV7u_PA3JFefY2RKi8YUSgcNdQmJZOTOANsGw6fw0u1zGprGMz7ATFD5O_EL_rT24-9aQXmqENsLCj3_s1A83m9Hi5KmEunvoeGL_wSoZVNX0RnXsFve_6_Tj75Is","dp":"AlpnOX_zNtXDsnNp7xwNYTQ05CDyD6OtM0UPYVsaVl9CYbTs4_kqJVdKvjT1JQWoellNEVDqCEb7h8xHrPJE5Ukx7hwTG_M6cJxZjmjgLcELZICIxo2Fq_PIg7XKxGC_6yAhC0Gn4EqsC9J7VhlobpFoC6ZIdxfgIQY08ClkS5E","dq":"ZVYnYKjryP_qGhAO4mfJvpmHLZWKL89G_BUn0FkkbsfLvimVImFCJA4Ftp3VUkLoRXqyyH2_8QwFT7M4Aa_SMjT7Dm7Nkst39zaCKI6hPTXhi0E6yqEGoDaTC9lLvKIvoybDFg7gAgJfa-etno9vzFgPfpr_C2zFh_QJXGmHfFc","n":"hM9FbX67PnlvRc-Hg0zMbp9yLyN8yys4Wax3SwbdU90JixUFTBXKTonBHUXTrvtAkTYe5_PdvDXnR0WNrJObQRuVt7bLcHCEUuIMYsLs_LYGdOxADYuGmRHkzZUufT4fg9i01yqmkKiWSmAGZadYBaEOLlQsmK0AnylW58tK7qcu0i8MNbo6FHZAxb7yeITtsuTUNVFUEZMIcw-grP13_sTvNH6nfmoW2UYZeWxrvEK8m-ecRUGTMpb1ruASIydOKKM7-csjHNs3eWJNDcOvJUCT78_mN5b91DndpjHkatS7wvtrOuv5d7rXMbCWM4dGW9VPhIgoJIVbfX7z5omQvw"}'
+  wellKnownUrl: http://localhost:${wiremock.server.port}/maskinporten/.well-known/oauth-authorization-server
+  scopes: DUMMY
+app:
+  name: aareg-tenor-adapter
+  url:
+    aareg:
+      services: DUMMY
+    entra:
+      token_endpoint: http://localhost:${wiremock.server.port}/entra/token
+  scope:
+    aareg.services: DUMMY
+  kafka:
+    topic:
+      arbeidsforholdhendelse: DUMMY

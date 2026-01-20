@@ -1,0 +1,9 @@
+spring:
+  main.banner-mode: 'off'
+  cache:
+    type: simple
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus,health

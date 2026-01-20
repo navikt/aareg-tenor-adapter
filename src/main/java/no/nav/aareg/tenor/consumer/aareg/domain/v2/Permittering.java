@@ -1,0 +1,14 @@
+package no.nav.aareg.tenor.consumer.aareg.domain.v2;
+
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
+
+@NoArgsConstructor
+@SuperBuilder
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+public class Permittering extends PermisjonPermittering {
+
+}

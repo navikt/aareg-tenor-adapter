@@ -1,0 +1,60 @@
+name: aareg-tenor-adapter - Build, push, and deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - 'pom.xml'
+      - 'apps/aareg-tenor-adapter/**'
+      - '.nais/aareg-tenor-adapter/*'
+
+jobs:
+  build_and_push:
+    name: Build and push Docker image
+    permissions:
+      contents: read
+      id-token: write
+    outputs:
+      docker_image: ${{ steps.docker-push.outputs.image }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Configure JDK
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'temurin'
+          java-version: '25'
+          cache: 'maven'
+      - name: Build
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        run: mvn clean package --also-make --threads=2 --batch-mode --settings maven-settings.xml
+      - uses: nais/docker-build-push@v0
+        id: docker-push
+        with:
+          team: arbeidsforhold
+          image_suffix: aareg-tenor-adapter
+          project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+          identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+          build_args: |
+            JAR_PATH=target/app.jar
+
+  deploy-dev:
+    name: Deploy to NAIS Dev-gcp
+    needs: build_and_push
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: nais/deploy/actions/deploy@v2
+        env:
+          CLUSTER: dev-gcp
+          RESOURCE: .nais/aareg-tenor-adapter/aareg-tenor-adapter.yaml
+          ENVIRONMENT: dev-gcp:arbeidsforhold:aareg-tenor-adapter
+          IMAGE: ${{ needs.build_and_push.outputs.docker_image }}

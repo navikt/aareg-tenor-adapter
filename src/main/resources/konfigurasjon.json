@@ -1,0 +1,195 @@
+{
+  "datasett": {
+    "identifikator": "arbeidsforhold",
+    "datasettOverskrift": "Arbeidsforhold",
+    "datasettEier": {
+      "organisasjonsnavn": "Nav",
+      "organisasjonsnummer": "0192:889640782"
+    },
+    "fellesdatakatalogDatasettIdentifikator": null
+  },
+  "relasjoner": {
+    "relasjoner": [
+      {
+        "felt": {
+          "feltnavn": "arbeidstaker",
+          "feltOverskrift": "Arbeidstaker"
+        },
+        "referertDatasett": "freg",
+        "relasjon": "id",
+        "relasjonsretning": "OPP"
+      },
+      {
+        "felt": {
+          "feltnavn": "arbeidssted",
+          "feltOverskrift": "Arbeidssted"
+        },
+        "referertDatasett": "brreg-er-fr",
+        "relasjon": "id",
+        "relasjonsretning": "OPP"
+      },
+      {
+        "felt": {
+          "feltnavn": "opplysningspliktig",
+          "feltOverskrift": "Opplysningspliktig"
+        },
+        "referertDatasett": "brreg-er-fr",
+        "relasjon": "id",
+        "relasjonsretning": "OPP"
+      }
+    ]
+  },
+  "soekevisning": {
+    "dokumentTittel": {"feltOverskrift": "Arbeidsforhold"},
+    "detaljertListe": [
+      {
+        "feltnavn": "arbeidsforholdId",
+        "feltOverskrift": "Arbeidsforhold id"
+      },
+      {
+        "feltnavn": "arbeidstaker",
+        "feltOverskrift": "Arbeidstaker"
+      },
+      {
+        "feltnavn": "arbeidssted",
+        "feltOverskrift": "Arbeidssted"
+      },
+      {
+        "feltnavn": "opplysningspliktig",
+        "feltOverskrift": "Opplysningspliktig"
+      },
+      {
+        "feltnavn": "startDato",
+        "feltOverskrift": "Startdato"
+      },
+      {
+        "feltnavn": "sluttDato",
+        "feltOverskrift": "Sluttdato"
+      },
+      {
+        "feltnavn": "arbeidsforholdtypeBeskrivelse",
+        "feltOverskrift": "Arbeidsforholdtype"
+      },
+      {
+        "feltnavn": "stillingsprosent",
+        "feltOverskrift": "Stillingsprosent"
+      },
+      {
+        "feltnavn": "timerPerUke",
+        "feltOverskrift": "Timer/uke"
+      },
+      {
+        "feltnavn": "ansettelsesformBeskrivelse",
+        "feltOverskrift": "Ansettelsesform"
+      },
+      {
+        "feltnavn": "permisjoner",
+        "feltOverskrift": "Permisjoner"
+      },
+      {
+        "feltnavn": "permitteringer",
+        "feltOverskrift": "Permitteringer"
+      },
+      {
+        "feltnavn": "timerMedTimeloenn",
+        "feltOverskrift": "Timer med timelønn"
+      },
+      {
+        "feltnavn": "utenlandsopphold",
+        "feltOverskrift": "Arbeid i utlandet"
+      },
+      {
+        "feltnavn": "historikk",
+        "feltOverskrift": "Historikk"
+      }
+    ]
+  },
+  "soekekriterier": {
+    "soek": [
+      {
+        "soekeTema": "Ansettelsesperiode",
+        "soekekriterier": [
+          {
+            "felt": {
+              "feltnavn": "startDato",
+              "feltOverskrift": "Startdato"
+            },
+            "typeSoek": "DATO_FRA_TIL"
+          },
+          {
+            "felt": {
+              "feltnavn": "sluttDato",
+              "feltOverskrift": "Sluttdato"
+            },
+            "typeSoek": "DATO_FRA_TIL"
+          }
+        ],
+        "soekekriterie": null,
+        "erPrimaerKildeSoek": false
+      },
+      {
+        "soekeTema": "Egenskaper",
+        "soekekriterier": [
+          {
+            "felt": {
+              "feltnavn": "harPermisjoner",
+              "feltOverskrift": "Har permisjoner"
+            },
+            "typeSoek": "BOOL"
+          },
+          {
+            "felt": {
+              "feltnavn": "harPermitteringer",
+              "feltOverskrift": "Har permitteringer"
+            },
+            "typeSoek": "BOOL"
+          },
+          {
+            "felt": {
+              "feltnavn": "harTimerMedTimeloenn",
+              "feltOverskrift": "Har timer med timelønn"
+            },
+            "typeSoek": "BOOL"
+          },
+          {
+            "felt": {
+              "feltnavn": "harUtenlandsopphold",
+              "feltOverskrift": "Har arbeid i utlandet"
+            },
+            "typeSoek": "BOOL"
+          },
+          {
+            "felt": {
+              "feltnavn": "harHistorikk",
+              "feltOverskrift": "Har historikk"
+            },
+            "typeSoek": "BOOL"
+          },
+          {
+            "felt": {
+              "feltnavn": "arbeidsforholdtype",
+              "feltOverskrift": "Arbeidsforholdtype"
+            },
+            "typeSoek": "ENKELTVALG",
+            "soekeVerdi": [
+              {
+                "soekeVerdi": "ordinaertArbeidsforhold",
+                "visningsNavn": "Ordinært"
+              },
+              {
+                "soekeVerdi": "maritimtArbeidsforhold",
+                "visningsNavn": "Maritimt"
+              },
+              {
+                "soekeVerdi": "frilanserOppdragstakerHonorarPersonerMm",
+                "visningsNavn": "Frilanser med mer"
+              }
+            ]
+          }
+        ],
+        "soekekriterie": null,
+        "erPrimaerKildeSoek": false
+      }
+    ]
+  }
+}

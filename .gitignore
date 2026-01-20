@@ -1,0 +1,11 @@
+.idea
+.class
+**/target/*
+/target/*
+/classes/artifacts/*
+*.iml
+*.log
+.DS_Store
+.run
+.env*
+/.httprequests/**/http-client.private.env.json

@@ -1,0 +1,101 @@
+apiVersion: nais.io/v1alpha1
+kind: Application
+metadata:
+  name: aareg-tenor-adapter
+  namespace: arbeidsforhold
+  labels:
+    team: arbeidsforhold
+spec:
+  env:
+    - name: APP_NAME
+      value: aareg-tenor-adapter
+    - name: STACK
+      value: preprod
+    - name: SPRING_PROFILES_ACTIVE
+      value: log-logstash,k8s,kafka,preprod
+    - name: JAVA_OPTS
+      value: "-XX:MinRAMPercentage=25.0 -XX:MaxRAMPercentage=75.0 -XX:+HeapDumpOnOutOfMemoryError"
+
+    - name: APP_SECURITY_OIDC_IDP_AZUREAD_ISSUERURL
+      value: https://login.microsoftonline.com/966ac572-f5b7-4bbe-aa88-c76419c0f851/v2.0
+    - name: APP_SECURITY_OIDC_IDP_AZUREAD_JWKSETURI
+      value: https://login.microsoftonline.com/966ac572-f5b7-4bbe-aa88-c76419c0f851/discovery/v2.0/keys
+
+    - name: API_URL_TENOR_FREG
+      value: 'https://testdata.api.skatteetaten.no/api/testnorge/v2/soek/freg?kql=identifikator:'
+    - name: API_URL_TENOR_BRREG
+      value: 'https://testdata.api.skatteetaten.no/api/testnorge/v2/soek/brreg-er-fr?kql=organisasjonsnummer:'
+    - name: API_URL_TENOR_DATASETT
+      value: 'https://testdata.api.skatteetaten.no/api/testnorge/v2/datasett/arbeidsforhold'
+
+    - name: APP_URL_AAREG_SERVICES
+      value: https://aareg-services.intern.dev.nav.no/api
+    - name: APP_SCOPE_AAREG_SERVICES
+      value: api://dev-fss.arbeidsforhold.aareg-services-nais/.default
+
+    - name: APP_URL_ENTRA_TOKEN_ENDPOINT
+      value: https://login.microsoftonline.com/966ac572-f5b7-4bbe-aa88-c76419c0f851/oauth2/v2.0/token
+
+    - name: APP_KAFKA_TOPIC_ARBEIDSFORHOLDHENDELSE
+      value: arbeidsforhold.aapen-aareg-arbeidsforholdhendelse-v1
+
+  image: {{image}}
+
+  port: 8080
+
+  ingresses:
+    - https://aareg-tenor-adapter.intern.dev.nav.no
+
+  resources:
+    limits:
+      memory: 2Gi
+    requests:
+      cpu: 10m
+      memory: 500Mi
+
+  replicas:
+    min: 1
+    max: 1
+    cpuThresholdPercentage: 50
+
+  liveness:
+    path: /internal/isAlive
+    initialDelay: 50
+    periodSeconds: 2
+    failureThreshold: 30
+
+  readiness:
+    path: /internal/isReady
+    initialDelay: 50
+    periodSeconds: 2
+    failureThreshold: 30
+
+  preStopHookPath: /internal/shutdown
+
+  prometheus:
+    enabled: true
+    path: actuator/prometheus
+
+  maskinporten:
+    enabled: true
+    scopes:
+      consumes:
+        - name: skatteetaten:testnorge/testdata.write
+        - name: skatteetaten:testnorge/testdata.read
+
+  kafka:
+    pool: nav-dev
+
+  azure:
+    application:
+      enabled: true
+
+  accessPolicy:
+    outbound:
+      rules:
+        - application: aareg-services-nais
+          namespace: arbeidsforhold
+          cluster: dev-fss
+      external:
+        - host: testdata.api.skatteetaten.no
+        - host: aareg-services.dev-fss-pub.nais.io
