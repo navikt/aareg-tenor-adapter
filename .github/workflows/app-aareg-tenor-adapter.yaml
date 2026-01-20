@@ -55,6 +55,6 @@ jobs:
       - uses: nais/deploy/actions/deploy@v2
         env:
           CLUSTER: dev-gcp
-          RESOURCE: .nais/aareg-tenor-adapter/aareg-tenor-adapter.yaml
+          RESOURCE: .nais/aareg-tenor-adapter.yaml
           ENVIRONMENT: dev-gcp:arbeidsforhold:aareg-tenor-adapter
           IMAGE: ${{ needs.build_and_push.outputs.docker_image }}
