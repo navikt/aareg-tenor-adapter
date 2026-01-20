@@ -49,20 +49,26 @@ public class KafkaConsumer {
             MDC.put(ARBEIDSFORHOLD_ID_KEY, String.valueOf(arbeidsforholdId));
             MDC.put(HENDELSESTYPE_KEY, hendelse.getEndringstype().name());
 
-            var arbeidsforholdPar = tenorUtil.konverterArbeidsforhold(aaregConsumer.finnArbeidsforhold(arbeidsforholdId));
-            var erKandidatForEndring = tenorService.erKandidatForTenorOpplasting(arbeidsforholdPar.getValue());
-
-            if (erKandidatForEndring && RELEVANTE_ENDRINGSTYPER_FOR_OPPLASTING.contains(hendelse.getEndringstype()) && arbeidsforholdInnenforBruksperiode(arbeidsforholdPar.getKey())) {
-                log.info("Arbeidsforhold er relevant for Tenor og vil lastes opp");
-                tenorService.lastOppArbeidsforhold(Map.ofEntries(arbeidsforholdPar));
-            } else if (erKandidatForEndring && hendelse.getEndringstype().equals(Sletting)) {
-                log.info("Arbeidsforhold skal slettes fra Tenor");
-                // Kan ikke bruke arbeidsforholdet i hendelsen, da denne ikke inneholder versjonsnummer
-                tenorService.slettArbeidsforhold(List.of(arbeidsforholdPar.getKey()));
+            var aaregArbeidsforhold = aaregConsumer.finnArbeidsforhold(arbeidsforholdId);
+            if (aaregArbeidsforhold == null) {
+                log.warn("Fant ikke arbeidsforhold med id {} i Aareg", arbeidsforholdId);
+                ack.acknowledge();
             } else {
-                log.info("Arbeidsforhold er ikke relevant for Tenor");
+                var arbeidsforholdPar = tenorUtil.konverterArbeidsforhold(aaregArbeidsforhold);
+                var erKandidatForEndring = tenorService.erKandidatForTenorOpplasting(arbeidsforholdPar.getValue());
+
+                if (erKandidatForEndring && RELEVANTE_ENDRINGSTYPER_FOR_OPPLASTING.contains(hendelse.getEndringstype()) && arbeidsforholdInnenforBruksperiode(arbeidsforholdPar.getKey())) {
+                    log.info("Arbeidsforhold er relevant for Tenor og vil lastes opp");
+                    tenorService.lastOppArbeidsforhold(Map.ofEntries(arbeidsforholdPar));
+                } else if (erKandidatForEndring && hendelse.getEndringstype().equals(Sletting)) {
+                    log.info("Arbeidsforhold skal slettes fra Tenor");
+                    // Kan ikke bruke arbeidsforholdet i hendelsen, da denne ikke inneholder versjonsnummer
+                    tenorService.slettArbeidsforhold(List.of(arbeidsforholdPar.getKey()));
+                } else {
+                    log.info("Arbeidsforhold er ikke relevant for Tenor");
+                }
+                ack.acknowledge();
             }
-            ack.acknowledge();
         } catch (JacksonException e) {
             log.error("Parsing av hendelse feilet", e);
             ack.nack(Duration.of(1, ChronoUnit.HOURS));
