@@ -29,7 +29,7 @@ spec:
       value: 'https://testdata.api.skatteetaten.no/api/testnorge/v2/datasett/arbeidsforhold'
 
     - name: APP_URL_AAREG_SERVICES
-      value: https://aareg-services.intern.dev.nav.no/api
+      value: https://aareg-services.dev-fss-pub.nais.io/api
     - name: APP_SCOPE_AAREG_SERVICES
       value: api://dev-fss.arbeidsforhold.aareg-services-nais/.default
 
