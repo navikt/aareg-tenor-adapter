@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>4.0.1</version>
+        <version>4.0.5</version>
     </parent>
 
     <artifactId>aareg-tenor-adapter</artifactId>
@@ -19,21 +19,13 @@
 
         <java.version>25</java.version>
 
-        <!-- Dokumentasjon: Swagger -->
-        <springdoc-openapi-starter-webmvc-ui.version>2.7.0</springdoc-openapi-starter-webmvc-ui.version>
-
         <!-- Test dependencies -->
-        <wiremock.version>3.4.0</wiremock.version>
+        <wiremock.version>3.13.2</wiremock.version>
 
         <!-- Logging -->
         <logstash-logback-encoder.version>9.0</logstash-logback-encoder.version>
         <logback-syslog4j.version>1.0.0</logback-syslog4j.version>
 
-        <!-- Diverse dependencies -->
-        <commons-collections4.version>4.5.0</commons-collections4.version>
-        <xmlsec.version>3.1.0</xmlsec.version>
-
-        <bcprov-jdk18on.version>1.79</bcprov-jdk18on.version>
     </properties>
 
     <dependencies>
