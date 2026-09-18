@@ -1,4 +1,4 @@
-package no.nav.aareg.tenor.consumer;
+package no.nav.aareg.tenor.consumer.tenor;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

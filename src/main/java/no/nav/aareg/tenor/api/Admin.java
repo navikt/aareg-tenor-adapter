@@ -2,7 +2,7 @@ package no.nav.aareg.tenor.api;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import no.nav.aareg.tenor.consumer.TenorUrlProperties;
+import no.nav.aareg.tenor.consumer.tenor.TenorUrlProperties;
 import no.nav.aareg.tenor.consumer.texas.TexasConsumer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

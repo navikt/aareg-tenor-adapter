@@ -1,4 +1,4 @@
-package no.nav.aareg.tenor.consumer;
+package no.nav.aareg.tenor.consumer.tenor;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

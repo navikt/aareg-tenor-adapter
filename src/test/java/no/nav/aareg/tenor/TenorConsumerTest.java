@@ -13,7 +13,7 @@ import no.nav.aareg.tenor.exception.ApplicationException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import no.nav.aareg.tenor.consumer.TenorConsumer;
+import no.nav.aareg.tenor.consumer.tenor.TenorConsumer;
 
 class TenorConsumerTest extends TenorTest {
 

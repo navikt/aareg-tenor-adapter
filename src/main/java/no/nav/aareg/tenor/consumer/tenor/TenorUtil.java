@@ -1,4 +1,4 @@
-package no.nav.aareg.tenor.consumer;
+package no.nav.aareg.tenor.consumer.tenor;
 
 import lombok.RequiredArgsConstructor;
 import no.nav.aareg.tenor.consumer.aareg.domain.v2.Arbeidsforhold;

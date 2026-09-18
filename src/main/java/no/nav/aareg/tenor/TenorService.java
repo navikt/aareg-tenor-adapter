@@ -2,7 +2,7 @@ package no.nav.aareg.tenor;
 
 import lombok.RequiredArgsConstructor;
 import no.nav.aareg.tenor.consumer.aareg.domain.v2.Arbeidsforhold;
-import no.nav.aareg.tenor.consumer.TenorConsumer;
+import no.nav.aareg.tenor.consumer.tenor.TenorConsumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

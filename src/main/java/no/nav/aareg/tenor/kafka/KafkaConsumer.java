@@ -3,8 +3,7 @@ package no.nav.aareg.tenor.kafka;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import no.nav.aareg.tenor.TenorService;
-import no.nav.aareg.tenor.consumer.TenorConsumer;
-import no.nav.aareg.tenor.consumer.TenorUtil;
+import no.nav.aareg.tenor.consumer.tenor.TenorUtil;
 import no.nav.aareg.tenor.consumer.aareg.AaregServicesConsumer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.slf4j.MDC;
@@ -20,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static no.nav.aareg.tenor.consumer.TenorUtil.arbeidsforholdInnenforBruksperiode;
+import static no.nav.aareg.tenor.consumer.tenor.TenorUtil.arbeidsforholdInnenforBruksperiode;
 import static no.nav.aareg.tenor.kafka.Hendelse.Endringstype.Endring;
 import static no.nav.aareg.tenor.kafka.Hendelse.Endringstype.Opprettelse;
 import static no.nav.aareg.tenor.kafka.Hendelse.Endringstype.Sletting;
@@ -51,10 +50,10 @@ public class KafkaConsumer {
 
             var aaregArbeidsforhold = aaregConsumer.finnArbeidsforhold(arbeidsforholdId);
             if (aaregArbeidsforhold == null) {
-                log.warn("Fant ikke arbeidsforhold med id {} i Aareg", arbeidsforholdId);
+                log.debug("Fant ikke arbeidsforhold med id {} i Aareg", arbeidsforholdId);
                 ack.acknowledge();
             } else {
-                log.info("Fant arbeidsforhold: {}", jsonMapper.writeValueAsString(aaregArbeidsforhold));
+                log.debug("Fant arbeidsforhold: {}", jsonMapper.writeValueAsString(aaregArbeidsforhold));
                 var arbeidsforholdPar = tenorUtil.konverterArbeidsforhold(aaregArbeidsforhold);
                 var erKandidatForEndring = tenorService.erKandidatForTenorOpplasting(arbeidsforholdPar.getValue());
 

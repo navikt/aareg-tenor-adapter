@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>4.1.0</version>
+        <version>4.1.1</version>
     </parent>
 
     <artifactId>aareg-tenor-adapter</artifactId>
@@ -26,6 +26,8 @@
         <logstash-logback-encoder.version>9.0</logstash-logback-encoder.version>
         <logback-syslog4j.version>1.0.0</logback-syslog4j.version>
 
+        <!-- Overrides (Oppdater/fjern disse dersom spring-boot bumpes) -->
+        <tomcat.version>11.0.25</tomcat.version>
     </properties>
 
     <dependencies>

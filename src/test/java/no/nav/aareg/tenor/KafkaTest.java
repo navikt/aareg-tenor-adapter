@@ -1,6 +1,6 @@
 package no.nav.aareg.tenor;
 
-import no.nav.aareg.tenor.consumer.TenorConsumer;
+import no.nav.aareg.tenor.consumer.tenor.TenorConsumer;
 import no.nav.aareg.tenor.consumer.aareg.AaregServicesConsumer;
 import no.nav.aareg.tenor.consumer.aareg.domain.v2.Arbeidsforhold;
 import no.nav.aareg.tenor.consumer.aareg.domain.v2.Arbeidstaker;

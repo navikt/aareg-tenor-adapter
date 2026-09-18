@@ -1,4 +1,4 @@
-package no.nav.aareg.tenor.consumer;
+package no.nav.aareg.tenor.consumer.tenor;
 
 import lombok.Builder;
 import lombok.Getter;
