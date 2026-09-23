@@ -1,6 +1,8 @@
 name: aareg-tenor-adapter - Build, push, and deploy
 
 on:
+  schedule:
+    - cron: '0 1 * * 1'
   workflow_dispatch:
   push:
     branches:
@@ -50,6 +52,7 @@ jobs:
     permissions:
       contents: read
       id-token: write
+    if: github.event_name == 'schedule' || github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v5
       - uses: nais/deploy/actions/deploy@v2
