@@ -2,7 +2,7 @@ name: aareg-tenor-adapter - Build, push, and deploy
 
 on:
   schedule:
-    - cron: '0 1 * * 1'
+    - cron: '0 1 * * *'
   workflow_dispatch:
   push:
     branches:
